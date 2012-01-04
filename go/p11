@@ -1,0 +1,8 @@
+#!/bin/sh
+# p11 - Script for Project Euler problem 11
+# Blake Mitchell, 2011
+
+cat p11.dat
+echo ""
+cat p11.dat | ./gridprod
+

@@ -1,0 +1,6 @@
+#!/bin/sh
+# p67 - Script for Project Euler problem 67 
+
+cat p67.dat
+echo ""
+cat p67.dat | ./maxtrisum
