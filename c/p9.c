@@ -17,8 +17,7 @@ main()
         for (a = 1; a <= MAX && !found; a++) {
                 for (b = a; b <= MAX && !found; b++) {
                         for (c = b; c <= MAX && !found; c++) {
-                                if (a + b + c == SUM &&
-                                    a*a + b*b == c*c)
+                                if (a + b + c == SUM && a*a + b*b == c*c)
                                         found = 1;
                         }
                 }
