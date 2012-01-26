@@ -2,7 +2,7 @@ package eutil
 
 import (
         "strconv"
-        "math"
+        //"math"
 )
 
 
