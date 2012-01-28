@@ -9,7 +9,7 @@ import (
 )
 
 
-const SPIRAL_RADIUS = 501 
+const SPIRAL_RADIUS = 501
 const SPIRAL_DIAMETER = SPIRAL_RADIUS*2 - 1
 
 
@@ -30,8 +30,8 @@ func main() {
                 leftdiag.Add(leftdiag, lc)
         }
         dsum.Add(leftdiag, rightdiag)
-        fmt.Printf("Sum of diagonals in %dx%d spiral: ", SPIRAL_DIAMETER,
-                                                         SPIRAL_DIAMETER);
+        diam := spiral_side_len(SPIRAL_RADIUS)
+        fmt.Printf("Sum of diagonals in %dx%d spiral: ", diam, diam)
         fmt.Println(dsum)
 }
 
@@ -46,8 +46,8 @@ func spiral_upper_left_corner(iter int64) *big.Int {
 func spiral_side_len(iter int64) *big.Int {
         //The big package is incredibly awkward, so in case you can't tell,
         // side_len = iter*2 - 1
-        n := big.NewInt(0)        
+        n := big.NewInt(0)
         n = n.Add(n.Mul(big.NewInt(iter), big.NewInt(2)), big.NewInt(-1))
-        return n 
+        return n
 }
 
