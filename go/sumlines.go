@@ -9,7 +9,7 @@ import (
         "fmt"
         "bufio"
         "os"
-        //"./eutil/eutil"
+        "./eutil/eutil"
 )
 
 
@@ -18,8 +18,11 @@ func main() {
         if err != nil {
                 fmt.Println(err.String())
         } else {
-                fmt.Println(nums)
+                sum := Sumnumbers(nums)
+                fmt.Printf("First 10 digits of the sum of %d numbers: %s\n", 
+                           len(nums), sum[:10])
         }
+        
 }
 
 
@@ -50,3 +53,11 @@ func Readnumbers(in *bufio.Reader) ([]string, os.Error) {
 }
                 
                 
+func Sumnumbers(nums []string) string {
+        sum := "0"
+        for _, n := range(nums) {
+                sum = eutil.Add(sum, n)
+        }
+        
+        return sum
+}
