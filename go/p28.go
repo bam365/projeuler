@@ -8,27 +8,22 @@ import (
         "big"
 )
 
-
 const SPIRAL_RADIUS = 501
 
 
-
 func main() {
-        leftdiag, rightdiag := big.NewInt(1), big.NewInt(0)
+        dsum := big.NewInt(1)
         lc, sl := big.NewInt(0), big.NewInt(0)
-        dsum := big.NewInt(0)
+        var j int
         for i := int64(2); i <= SPIRAL_RADIUS; i++ {
                 lc = spiral_upper_left_corner(i)
                 sl.Sub(spiral_side_len(i), big.NewInt(1))
-                rightdiag.Add(rightdiag, lc)
-                lc.Sub(lc, sl)
-                leftdiag.Add(leftdiag, lc)
-                lc.Sub(lc, sl)
-                rightdiag.Add(rightdiag, lc)
-                lc.Sub(lc, sl)
-                leftdiag.Add(leftdiag, lc)
+                dsum.Add(dsum, lc)
+                for j = 0; j < 3; j++ {
+                        lc.Sub(lc, sl)
+                        dsum.Add(dsum, lc)
+                }
         }
-        dsum.Add(leftdiag, rightdiag)
         diam := spiral_side_len(SPIRAL_RADIUS)
         fmt.Printf("Sum of diagonals in %dx%d spiral: ", diam, diam)
         fmt.Println(dsum)
