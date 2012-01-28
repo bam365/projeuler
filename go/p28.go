@@ -10,7 +10,6 @@ import (
 
 
 const SPIRAL_RADIUS = 501
-const SPIRAL_DIAMETER = SPIRAL_RADIUS*2 - 1
 
 
 
