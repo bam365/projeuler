@@ -30,8 +30,8 @@ main()
                 }
         }
 
-        printf("There were %d Sundays that fell on the first of the month between\n", fscount);
-        printf("Jan 1, 1901 and Dec 31\n");
+        printf("There were %d Sundays that fell on the first of the month "
+               "\nbetween Jan 1, 1901 and Dec 31, 2001\n", fscount);
 
         return 0;
 }
