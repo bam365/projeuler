@@ -63,7 +63,7 @@ int plist_hit(int n, struct plist_node* root)
                         node->count++;
                         return node->count;
                 }
-                /*This lists are ordered least to greatest*/
+                /*These lists are ordered least to greatest*/
                 else if (node->prime > n) {
                         plist_insert(n, 1, lastnode);
                         return newnode->count;
@@ -90,7 +90,7 @@ int plist_hit_greatest(int n, int c, struct plist_node* root)
                                 node->count = c;
                         return node->count;
                 }
-                /*This lists are ordered least to greatest*/
+                /*These lists are ordered least to greatest*/
                 else if (node->prime > n) {
                         plist_insert(n, c, lastnode);
                         return newnode->count;
@@ -152,7 +152,7 @@ int isprime(int n)
                 return 0;
         
         for(i = 2; i <= n / i; i++)
-                if ((double)(n)/i == (double)(n/i))
+                if (!(n % i))
                         return 0;
         return 1;
 }
@@ -169,7 +169,7 @@ int primefact(int n, struct plist_node *pl)
         }
 
         for (i = 2; i <= n; i++) {
-                if (isprime(i) && (double)(n)/(double)i == (double)(n/i)) {
+                if (isprime(i) && !(n % i)) {
                         n /= i;
                         plist_hit(i, pl);
                         i = 1;
