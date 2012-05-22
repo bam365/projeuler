@@ -1,6 +1,6 @@
 EUTILC = -L. -leutil -lm
 
-all: p5 p20 p16 p2 p4 p7 p9 p21 p19 p30 p31 maxtrisum
+all: p5 p20 p16 p2 p4 p7 p9 p21 p19 p30 p31 p23 maxtrisum
 libeutil.a: eutil.c
 	gcc -o eutil.o -c eutil.c -lm
 	ar rcs libeutil.a eutil.o
@@ -26,5 +26,7 @@ p30: p30.c
 	gcc -o p30 p30.c -lm
 p31: p31.c
 	gcc -o p31 p31.c
+p23: p23.c
+	gcc -o p23 p23.c
 maxtrisum: maxtrisum.c
 	gcc -o maxtrisum maxtrisum.c
