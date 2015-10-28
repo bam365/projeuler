@@ -13,8 +13,6 @@ module Eutil
     , countFactors
     ) where
 
-import           Data.Function (fix)
-import           Data.Function.Memoize (memoFix)
 import           Data.List (find)
 import qualified Data.Map as M
 import           Data.Maybe (fromJust)
