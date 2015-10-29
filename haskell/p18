@@ -1,0 +1,2 @@
+#!/bin/sh
+cat ../p18.dat | ./trisum

@@ -11,9 +11,12 @@ module Eutil
     , toDigit
     , triangleNums
     , countFactors
+    , factorial
+    , digitSum
+    , intToWords
     ) where
 
-import           Data.List (find)
+import           Data.List (find, intersperse)
 import qualified Data.Map as M
 import           Data.Maybe (fromJust)
 
@@ -90,3 +93,54 @@ triangleNums = 1 : zipWith (+) [2..] triangleNums
 
 countFactors :: Integral i => i -> i
 countFactors = product . map (+ 1) . M.elems . primeFactorization 
+
+
+factorial :: Integral i => i -> i
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+
+digitSum :: (Show i, Integral i) => i -> Int
+digitSum = sum . map toDigit . show
+
+
+intToWords :: Bool -> Int -> String
+intToWords useAnd num | num >= 0 =
+    concat . intersperse " " . filter (not . null) . map placesWords $ 
+        [ (9, " billion", False)
+        , (6, " million", False) 
+        , (3, " thousand", False) 
+        , (0, "", useAnd) 
+        ]
+  where 
+    placesWords (i, word, withAnd) =
+        let places3 p = num `mod` (10^(p+3)) `div` (10^p)
+            n = places3 i
+        in if n /= 0 then hundredsToWords withAnd n ++ word else ""
+
+    hundredsToWords withAnd n 
+        | n == 0  = ""
+        | n < 100 = tensToWords tens
+        | otherwise = 
+            let tensPart = if tens == 0 then "" 
+                           else (if withAnd then " and " else " ") ++ tensToWords tens
+            in onesToWords hunds ++ " hundred" ++ tensPart
+      where (hunds, tens) = n `quotRem` 100
+
+    tensToWords n
+        | n == 0 = ""
+        | tens == 0 = onesToWords ones
+        | n >= 10 && n < 20 = 
+            [ "ten", "eleven", "twelve", "thirteen"
+            , "fourteen", "fifteen", "sixteen"
+            , "seventeen", "eighteen", "nineteen"
+            ] !! (n - 10)
+        | otherwise = 
+            let tensPart = [ "", "", "twenty", "thirty", "forty"
+                           , "fifty" , "sixty", "seventy"
+                           , "eighty", "ninety" ] !! tens
+            in tensPart ++ (if ones /= 0 then "-" ++ onesToWords ones else "")
+      where (tens, ones) = n `quotRem` 10
+            
+    onesToWords = (["zero", "one", "two", "three", "four", 
+                    "five", "six", "seven", "eight", "nine"] !!)
