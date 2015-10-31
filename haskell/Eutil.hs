@@ -14,6 +14,7 @@ module Eutil
     , factorial
     , digitSum
     , intToWords
+    , propFactorSum
     ) where
 
 import           Data.List (find, intersperse)
@@ -79,7 +80,7 @@ fastLCM :: [Int] -> Int
 fastLCM  = pfToNum . M.unionsWith max . map primeFactorization
 
 
-fibonacci :: [Int]
+fibonacci :: Integral i => [i]
 fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
 
 
@@ -144,3 +145,16 @@ intToWords useAnd num | num >= 0 =
             
     onesToWords = (["zero", "one", "two", "three", "four", 
                     "five", "six", "seven", "eight", "nine"] !!)
+
+
+propFactorSum :: Int -> Int
+propFactorSum n   
+    | n <= 1 = 0
+    | otherwise = loop 1 2
+  where loop acc i
+            | q < i = acc
+            | q == i = if r == 0 then acc + q else acc
+            | otherwise = 
+                let acc' = if r == 0 then acc + i + q else acc
+                in loop acc' (i + 1)
+          where (q, r) = n `quotRem` i
